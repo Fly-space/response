@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 - Сюда нельзя!</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #ffcccc, #ccffff);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            position: relative;
+        }
+        
+        h1 {
+            color: #ff3333;
+            font-size: 4em;
+            margin: 0;
+            text-shadow: 3px 3px 0 #ffcccc;
+            animation: bounce 2s infinite;
+        }
+        
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        
+        p {
+            color: #555;
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+        
+        .emoji {
+            font-size: 5em;
+            margin: 20px 0;
+            animation: shake 1.5s infinite;
+        }
+        
+        .door {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: swing 3s infinite;
+            transform-origin: top center;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 0 #3e8e41;
+        }
+        
+        .button:hover {
+            background-color: #45a049;
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #3e8e41;
+        }
+        
+        .floating {
+            position: absolute;
+            font-size: 2em;
+            animation: float 5s infinite ease-in-out;
+        }
+        
+        .floating:nth-child(1) {
+            top: -30px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating:nth-child(2) {
+            top: -20px;
+            right: 15%;
+            animation-delay: 1s;
+        }
+        
+        .floating:nth-child(3) {
+            bottom: -30px;
+            left: 20%;
+            animation-delay: 2s;
+        }
+        
+        .floating:nth-child(4) {
+            bottom: -20px;
+            right: 10%;
+            animation-delay: 3s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
+        }
+        
+        @keyframes swing {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        .secret {
+            color: transparent;
+            cursor: default;
+            user-select: none;
+        }
+        
+        .secret:hover {
+            color: #ff3333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="floating">🚫</div>
+        <div class="floating">⛔</div>
+        <div class="floating">🔒</div>
+        <div class="floating">❌</div>
+        
+        <h1>403</h1>
+        <div class="emoji">🚧</div>
+        <h2>Ой-ой! Сюда нельзя!</h2>
+        <p>Похоже, вы пытаетесь попасть туда, куда вам не положено. <span class="secret">(Но мы все равно вас любим!)</span></p>
+        <p>Может быть, вы заблудились, или просто слишком любопытны? В любом случае, эта дверь закрыта.</p>
+        
+        <div class="door">🚪</div>
+        
+        <p>Попробуйте вернуться на <a href="/" class="button">главную страницу</a> или поискать что-то другое.</p>
+        
+        <p><small>P.S. Если вы администратор, проверьте свои права доступа. Если нет - даже не пытайтесь!</small></p>
+    </div>
+
+    <script>
+        function createFloatingEmoji() {
+            const emojis = ['🚫', '⛔', '🔒', '❌', '🚷', '📵', '🔞'];
+            const emoji = document.createElement('div');
+            emoji.className = 'floating';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + '%';
+            emoji.style.top = Math.random() * 100 + '%';
+            emoji.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(emoji);
+            
+            setTimeout(() => {
+                emoji.remove();
+            }, 10000);
+        }
+        
+        for (let i = 0; i < 8; i++) {
+            setTimeout(createFloatingEmoji, i * 1000);
+        }
+        setInterval(createFloatingEmoji, 2000);
+        
+       document.querySelector('.door').addEventListener('click', function() {
+            this.style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                this.style.animation = 'swing 3s infinite';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
